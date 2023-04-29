@@ -16,21 +16,16 @@ public class Proyecto {
     @GeneratedValue(strategy=GenerationType.SEQUENCE)
     private Long id;
     private String nombre;
-    private String lenguaje;
-    private Date fechaInicio;
-    private Date fechaFin;
+    private String descripcion;
 
-    public Proyecto(Long id, String nombre, String lenguaje, Date fechaInicio, Date fechaFin) {
+    public Proyecto(Long id, String nombre, String descripcion) {
         this.id = id;
         this.nombre = nombre;
-        this.lenguaje = lenguaje;
-        this.fechaInicio = fechaInicio;
-        this.fechaFin = fechaFin;
+        this.descripcion = descripcion;
     }
 
-    
-    
-    public Proyecto(){
-        
+    public Proyecto() {
     }
+
+   
 }

@@ -17,29 +17,23 @@ public class UsuarioService implements IUsuarioService{
     }
 
     @Override
-    public void deleteUsuario(Long id) {
-        this.usuarioRepo.deleteById(id);
-    }
-
-    @Override
-    public Usuario putUsuario(Long id, String nombre, String apellido, String clave, String ocupacion, 
-                                String email, String telefono, String localizacion) {
-       
-        Usuario usuario = this.usuarioRepo.findById(id).orElse(null);
-        
-        usuario.setNombre(nombre);
-        usuario.setApellido(apellido);
-        usuario.setClave(clave);
-        usuario.setOcupacion(ocupacion);
-        usuario.setEmail(email);
-        usuario.setTelefono(telefono);
-        usuario.setLocalizacion(localizacion);
-        
-        return usuario;
-    }
-
-    @Override
     public Usuario findByEmail(String email){
-        return this.usuarioRepo.findByEmail(email);
+        Usuario usuario = this.usuarioRepo.findByEmail(email);
+        if (usuario!=null){
+            return this.usuarioRepo.findByEmail(email);
+        }
+        else{
+            return null;
+        }
+    }
+
+    @Override
+    public boolean password(String passwordSaved, String passwordObtain) {
+        return passwordSaved.equals( passwordObtain );
+    }
+
+    @Override
+    public Usuario cerrarSesion() {
+        return null;
     }
 }
