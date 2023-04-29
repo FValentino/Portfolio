@@ -11,7 +11,7 @@ import { TechnologiesComponent } from './componentes/technologies/technologies.c
 import { ProjectsComponent } from './componentes/projects/projects.component';
 import { ContactComponent } from './componentes/contact/contact.component';
 import { PortfolioComponent } from './componentes/portfolio/portfolio.component';
-import { HttpClientModule } from '@angular/common/http'
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http'
 
 //Formulario
 import { ReactiveFormsModule} from '@angular/forms';
@@ -23,6 +23,7 @@ import { CommonModule } from '@angular/common';
 import { EducationComponent } from './componentes/education/education.component';
 import { LoginComponent } from './componentes/login/login.component';
 import { IniciarSesionComponent } from './componentes/iniciar-sesion/iniciar-sesion.component';
+import { InterceptorService } from './servicios/interceptor.service';
 
 @NgModule({
   declarations: [
@@ -45,7 +46,8 @@ import { IniciarSesionComponent } from './componentes/iniciar-sesion/iniciar-ses
     ReactiveFormsModule,
     CommonModule
   ],
-  providers: [CargarScriptService, ExtraerDatosService],
+  providers: [CargarScriptService, ExtraerDatosService, 
+    {provide: HTTP_INTERCEPTORS, useClass:InterceptorService, multi:true}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

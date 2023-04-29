@@ -9,14 +9,13 @@ import { ExtraerDatosService } from '../../servicios/extraer-datos.service';
 export class HeroComponent implements OnInit {
 
   yo : any;
-  img : any;
 
   constructor (private datos:ExtraerDatosService) {}
 
   ngOnInit(): void {
       this.datos.obtenerDatos().subscribe(dato => {
-        this.yo = dato.yo;
-        this.img = dato.img.profile;
+        console.log("Datos usuario: " + JSON.stringify(dato));
+        this.yo = dato;
       });
   }
 }

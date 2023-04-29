@@ -8,20 +8,31 @@ import { map } from 'rxjs';
 })
 export class AutenticacionService {
 
-url:string = "http://localhost:8080/portfolio/iniciar-sesion"
+urlInicio:string = "http://localhost:8080/portfolio/usuario/iniciar-sesion";
+
+
 userSubject: BehaviorSubject<any>;
 
   constructor(private http : HttpClient ) { 
-    console.log("El servicio de autenticacion esta funcionando");
     this.userSubject = new BehaviorSubject<any>(JSON.parse(sessionStorage.getItem('currentUser') || '{}'));
   }
 
+  get UsuarioAutenticado(){
+    return this.userSubject.value;
+  }
+
   iniciarSesion (credenciales:any):Observable <any>{
-    return this.http.post(this.url, credenciales).pipe(map(data=>{
+    return this.http.post(this.urlInicio, credenciales).pipe(map(data=>{
       
       sessionStorage.setItem('currentUser', JSON.stringify(data));
-      
+      this.userSubject.next(data);
+    
       return data;
     }));
+  }
+
+  cerrarSesion(){
+    sessionStorage.removeItem('currentUser');
+    this.userSubject.closed;
   }
 }

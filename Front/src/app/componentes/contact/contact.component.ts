@@ -18,17 +18,20 @@ export class ContactComponent implements OnInit{
   contacto : any;
 
   constructor(private datos: ExtraerDatosService, private formBuilder: FormBuilder, private http: HttpClient) {
+    
     this.form= this.formBuilder.group({
       email:['',[Validators.required, Validators.email]],
-      nombre:['',[Validators.required]],
-      asunto:['',[Validators.required]],
+      nombre:['',[Validators.required, Validators.maxLength(50)]],
+      asunto:['',[Validators.required, Validators.maxLength(255)]],
       mensaje:['',[Validators.required]]
     });
   }
 
   ngOnInit(): void {
       this.datos.obtenerDatos().subscribe(dato => {
-        this.contacto = dato.yo.contacto;
+        console.log("Datos usuario: " + JSON.stringify(dato));
+
+        this.contacto = dato;
       });
   }
 

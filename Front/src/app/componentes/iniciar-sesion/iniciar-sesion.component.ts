@@ -11,12 +11,35 @@ import { AutenticacionService } from 'src/app/servicios/autenticacion.service';
 export class IniciarSesionComponent {
 
   form:FormGroup;
+  alerta:boolean = false;
 
   constructor (private formBuilder:FormBuilder, private autenticacion : AutenticacionService, private ruta:Router){
     this.form = this.formBuilder.group({
+      //El email es requerido y tiene que tener el formato correcto
       email:['', [Validators.required, Validators.email]],
+      //La contraseña es requerida y tiene que tener como minimo 8 caracteres
       password:['', [Validators.required, Validators.minLength(8)]]
     })
+  }
+
+  //La funcion es llamada al utilizar el boton de "Ingresar"
+  onEnviar (event:Event){
+    event.preventDefault;
+    //Llamada a la funcion "iniciar sesion" del servicio "autenticacion"
+    this.autenticacion.iniciarSesion(this.form.value).subscribe(data => {
+
+      if (data!=null){
+        this.ruta.navigate(['/portfolio']);
+      }
+      else{
+        this.alerta=true;
+        this.ruta.navigate(['/iniciar-sesion']);
+      }
+    });
+  }
+
+  closeAlerta(){
+    this.alerta = false;
   }
 
   get Email(){
@@ -25,14 +48,5 @@ export class IniciarSesionComponent {
 
   get Password (){
     return this.form.get('password');
-  }
-
-  onEnviar (event:Event){
-    event.preventDefault;
-    this.autenticacion.iniciarSesion(this.form.value).subscribe(data => {
-      
-      console.log("DATA:" + JSON.stringify(data));
-      this.ruta.navigate(['portfolio']);
-    });
   }
 }
