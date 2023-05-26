@@ -7,12 +7,27 @@ import { Observable } from 'rxjs';
 })
 export class ExtraerDatosService {
 
-  url : string = "http://localhost:8080/portfolio"; 
+  urlPersona : string = "https://back-portfolio-cedh.onrender.com/portfolio/persona"; 
+  urlTecnologia : string = "https://back-portfolio-cedh.onrender.com/portfolio/tecnologia";
+  urlEducacion : string = "https://back-portfolio-cedh.onrender.com/portfolio/educacion";
+  urlProyecto : string = "https://back-portfolio-cedh.onrender.com/portfolio/proyecto";
+
 
   constructor( private http : HttpClient) { }
 
-  obtenerDatos() : Observable <any> {
+  obtenerDatosPersona() : Observable <any> {
+    return this.http.get<any>(this.urlPersona);
+  }
 
-    return this.http.get<any>(this.url);
+  obtenerDatosTecnologia() : Observable <any> {
+    return this.http.get<any>(this.urlTecnologia);
+  }
+  
+  obtenerDatosEducacion() : Observable <any> {
+    return this.http.get<any>(this.urlEducacion);
+  }
+
+  obtenerDatosProyecto() : Observable <any> {
+    return this.http.get<any>(this.urlProyecto);
   }
 }

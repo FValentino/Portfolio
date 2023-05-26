@@ -8,17 +8,14 @@ import { map } from 'rxjs';
 })
 export class AutenticacionService {
 
-urlInicio:string = "http://localhost:8080/portfolio/usuario/iniciar-sesion";
+  urlInicio:string = "https://back-portfolio-cedh.onrender.com/portfolio/usuario/iniciar-sesion";
+  
 
 
-userSubject: BehaviorSubject<any>;
+  userSubject: BehaviorSubject<any>;
 
   constructor(private http : HttpClient ) { 
     this.userSubject = new BehaviorSubject<any>(JSON.parse(sessionStorage.getItem('currentUser') || '{}'));
-  }
-
-  get UsuarioAutenticado(){
-    return this.userSubject.value;
   }
 
   iniciarSesion (credenciales:any):Observable <any>{
@@ -31,8 +28,22 @@ userSubject: BehaviorSubject<any>;
     }));
   }
 
-  cerrarSesion(){
-    sessionStorage.removeItem('currentUser');
-    this.userSubject.closed;
+  cerrarSesion () : void{
+    sessionStorage.setItem('currentUser', '{}');
+    this.userSubject.next({});
+    window.location.reload();
+  }
+
+  get UsuarioAutenticado(){
+    return this.userSubject.value;
+  }
+
+  get UsuarioIniciado() : boolean{
+    if (JSON.stringify(this.UsuarioAutenticado) != '{}' && JSON.stringify(this.UsuarioAutenticado) != 'null' ){
+      return true;
+    }
+    else{
+      return  false;
+    }
   }
 }

@@ -16,8 +16,8 @@ export class AboutComponent implements OnInit{
   constructor(private datos : ExtraerDatosService) {}
 
   ngOnInit(): void {
-      this.datos.obtenerDatos().subscribe(dato => {
-        this.yo = dato.yo;
+      this.datos.obtenerDatosPersona().subscribe(dato => {
+        this.yo = dato;
       });
   }
 

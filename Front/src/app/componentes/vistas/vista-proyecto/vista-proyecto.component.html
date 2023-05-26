@@ -1,0 +1,19 @@
+<app-header></app-header>
+
+<section class="contenedor bg-formularios">
+    <div class="container">
+        <div class="section-title mt-3">
+            <div>
+                <img [src]="proyecto.urlImagen" class="img img-fluid rounded border border-dark" alt="">
+            </div>
+            <h2>{{proyecto.nombre}}</h2>
+        </div>
+        <div class="container w-50 h-50">
+            <div class="justify-content-center">
+                <p> {{proyecto.descripcion}} </p>
+                <a [href]="proyecto.urlProyecto" class="mt-5">Github del proyecto</a>
+            </div>
+        </div>
+    </div>
+</section>
+

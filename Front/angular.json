@@ -40,8 +40,8 @@
               "node_modules/boxicons/dist/boxicons.js",
               "node_modules/glightbox/dist/js/glightbox.js",
               "node_modules/swiper/swiper-bundle.js",
-              "node_modules/isotope-layout/isotope.pkgd.js",
-              "node_modules/purecounter/purecounter_vanilla.js",
+              "node_modules/isotope-layout/dist/isotope.pkgd.js",
+              "node_modules/@srexi/purecounterjs/dist/purecounter_vanilla.js",
               "src/assets/js/main.js"
             ]
           },
@@ -50,13 +50,13 @@
               "budgets": [
                 {
                   "type": "initial",
-                  "maximumWarning": "500kb",
-                  "maximumError": "1mb"
+                  "maximumWarning": "2mb",
+                  "maximumError": "3mb"
                 },
                 {
                   "type": "anyComponentStyle",
-                  "maximumWarning": "2kb",
-                  "maximumError": "4kb"
+                  "maximumWarning": "5kb",
+                  "maximumError": "7kb"
                 }
               ],
               "outputHashing": "all"
@@ -67,7 +67,13 @@
               "vendorChunk": true,
               "extractLicenses": false,
               "sourceMap": true,
-              "namedChunks": true
+              "namedChunks": true,
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.development.ts"
+                }
+              ]
             }
           },
           "defaultConfiguration": "production"

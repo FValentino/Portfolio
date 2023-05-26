@@ -12,15 +12,10 @@ export class HeaderComponent {
   usuarioIniciado:boolean = false;
 
   constructor(private autenticacion:AutenticacionService, private ruta:Router){
-
-    if (JSON.stringify(this.autenticacion.UsuarioAutenticado) != "{}"){
-      this.usuarioIniciado = true;
-    }
+    this.usuarioIniciado = this.autenticacion.UsuarioIniciado;
   }
 
   cerrarSesion(){
-    this.usuarioIniciado = false;
-    sessionStorage.removeItem('currentUser');
-    window.location.reload();
+    this.autenticacion.cerrarSesion();
   }
 }
